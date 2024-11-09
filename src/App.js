@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+// import Navbar from "./components/Navbar";
+// import Hero from "./components/Hero"
+// import Services from "./pages/Services"
+// import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+// function App() {
+//   return (
+//     <div className='max-w-[1240px] md:mx-auto mx-8 my-8'>
+      
+//       <Navbar/>
+      
+//       <Hero/>  
+      
+//         </div>
+//   );
+// }
+
+// export default App;
+
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Services from "./pages/Services";  
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';  // Import required routing components
+import Resume from "./pages/Resume";
+
+// Create your routes using createBrowserRouter
+const router = createBrowserRouter([
+  {
+    path: "/",       // Root path
+    element: (
+      <div className='max-w-[1240px] md:mx-auto mx-8 my-8'>
+        <Navbar />
+        <Hero />
+      </div>
+    ),
+  },
+  {
+    path: "/services",  // Path for the Services page
+    element: (
+      <div className='max-w-[1240px] md:mx-auto mx-8 my-8'>
+        <Navbar />      {/* Navbar remains the same on every page */}
+        <Services />    {/* Render Services page */}
+      </div>
+    ),
+  },
+  {
+    path: "/resume",  // Path for the Services page
+    element: (
+      <div className='max-w-[1240px] md:mx-auto mx-8 my-8'>
+        <Navbar />      {/* Navbar remains the same on every page */}
+        <Resume />    {/* Render Services page */}
+      </div>
+    ),
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router} />  // Use RouterProvider to provide routes
   );
 }
 
