@@ -7,15 +7,11 @@ function Resume() {
     switch (activeSection) {
       case "experience":
         return (
-          <div className='col-span-2  flex flex-col '> 
+          
+          <div className='col-span-2  h-svh flex flex-col '> 
           <h1 className='font-bold text-xl mb-2'>My experience</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni commodi voluptas sequi.</p>
           <div className='grid md:grid-cols-2 gap-8 mt-8 '>
-            {/* <ul className=''>
-              <li>2022-present</li>
-              <li>Full Dtack Developer</li>
-              <li className='list-disc list-inside'> Tech Solutions Inc.</li>
-            </ul> */}
             <div className=' flex flex-col  gap-2 bg-gray-800 p-8 transform transition duration-300 hover:scale-105'>
               
               <p className='text-sm text-[#25F09F]'>2022-present</p>
@@ -78,7 +74,7 @@ function Resume() {
   };
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto mt-24">
       <div className="grid grid-cols-1 md:grid-cols-3 mx-auto md:mx-8 text-white mt-12 gap-8">
         <div className="flex flex-col">
           <h1 className="text-xl">Why Hire Me?</h1>

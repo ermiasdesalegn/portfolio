@@ -1,105 +1,113 @@
-// import React,{useState} from 'react'
-// import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
-// import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-// function Navbar() {
-
-//   const [nav, setNav] = useState(true);
-//   const handleNav = () => {
-//     setNav(!nav);
-//   };
-
-//   return (
-   
-//     <div className='md:mx-8 mx-auto'>
-//       <div className='flex justify-between  text-white md:mx-auto '>
-//         <h1>Ermias</h1>
-//         <div className='hidden md:flex justify-between gap-4 text-sm items-center'>
-//             {/* <NavLink className='hover:text-[#25F09F] hover:no-underline text-[#25F09F] underline' to='/'>Home</NavLink> */}
-//             {/* <NavLink className='hover:text-[#25F09F]' to={Services} >Services</NavLink> */}
-//             {/* <NavLink className='hover:text-[#25F09F]' to='/'>Resume</NavLink>
-//             <NavLink className='hover:text-[#25F09F]' to='/'>Work</NavLink>
-//             <NavLink className='hover:text-[#25F09F]' to='#'>Contact</NavLink> */}
-//             <a className='hover:text-[#25F09F] hover:no-underline text-[#25F09F] underline' href='#'>Home</a> 
-//             <a className='hover:text-[#25F09F]' href='../pages/Services' >Services</a> 
-//             <a className='hover:text-[#25F09F]' href='#'>Resume</a>
-//             <a className='hover:text-[#25F09F]' href='#'>Work</a>
-//             <a className='hover:text-[#25F09F]' href='#'>Contact</a> 
-
-//             <button className='bg-[#25F09F] rounded-lg p-1 px-3 text-black hover:text-gray-600'>Hire me</button>
-//         </div>
-//       </div>
-//       <div onClick={handleNav} className="absolute right-5 top-8 md:hidden text-[#00df9a] text-end">
-//         {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-//       </div>
-//       <div
-//         className={
-//           !nav
-//             ? "fixed left-0 top-0 w-[55%] h-full border-r border-r-gray-900  bg-[#000300] ease-in-out duration-500 "
-//             : "fixed left-[-100%] text-[#00df9a]"
-//         }
-//       >
-//        <div className="uppercase p-4 text-white flex flex-col gap-8 ">
-//        <a className='hover:text-[#25F09F] hover:no-underline text-[#25F09F] underline' href='#'>Home</a> 
-//             <a className='hover:text-[#25F09F]' href='/service' >Services</a> 
-//             {/* <a className='hover:text-[#25F09F]' href='/resume'>Resume</a>
-//             <a className='hover:text-[#25F09F]' href='/work'>Work</a>
-//             <a className='hover:text-[#25F09F]' href='/contact'>Contact</a>  */}
-
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Navbar
-
-
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
+import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 function Navbar() {
   const [nav, setNav] = useState(true);
+  const location = useLocation(); // Get the current location (URL)
+
+  // Set active link based on current route
+  const activeLink = location.pathname;
+
   const handleNav = () => {
     setNav(!nav);
   };
 
+  // Function to handle closing the mobile menu on link click
+  const handleLinkClick = () => {
+    if (!nav) {
+      handleNav(); // Close the menu on mobile when a link is clicked
+    }
+  };
+
   return (
-    <div className='md:mx-8 mx-auto'>
+    <div className='fixed top-0 left-0 right-0 z-50 max-md:mx-8 mx-auto max-w-[1240px] max-sm:mx-3 my-8'>
       <div className='flex justify-between text-white md:mx-auto'>
-        <h1>Ermias</h1>
+        <Link className='text-[#25F09F] text-2xl' to='/' onClick={handleLinkClick}>Ermias</Link>
         <div className='hidden md:flex justify-between gap-4 text-sm items-center'>
-          {/* Using NavLink instead of href */}
-          <NavLink className='hover:text-[#25F09F] hover:no-underline text-[#25F09F] underline' to='/'>Home</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/services'>Services</NavLink> 
-          <NavLink className='hover:text-[#25F09F]' to='/Resume'>Resume</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/work'>Work</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/contact'>Contact</NavLink>
+          <Link
+            className={`hover:text-[#25F09F] hover:no-underline ${activeLink === '/' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/'
+            onClick={handleLinkClick}>
+            Home
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/services' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/services'
+            onClick={handleLinkClick}>
+            Services
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/Resume' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/Resume'
+            onClick={handleLinkClick}>
+            Resume
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/work' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/work'
+            onClick={handleLinkClick}>
+            Work
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/contact' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/contact'
+            onClick={handleLinkClick}>
+            Contact
+          </Link>
           
-          <button className='bg-[#25F09F] rounded-lg p-1 px-3 text-black hover:text-gray-600'>Hire me</button>
+          <div className="relative group">
+            <a href='https://www.upwork.com/freelancers/~0123305dca45e8d9cf'><button className="bg-[#25F09F] rounded-lg p-1 px-3 text-black hover:text-gray-600">
+              Hire me
+            </button>
+            </a>
+            <div className="absolute left-1/2 transform -translate-x-1/2 translate-y-6 opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="animate-bounce text-orange-400 -rotate-10 font-black">Hire!</div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu Icon */}
-      <div onClick={handleNav} className="absolute right-5 top-8 md:hidden text-[#00df9a] text-end">
+      <div onClick={handleNav} className="absolute right-5 top-8 md:hidden text-[#00df9a] text-end z-50">
         {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={
-          !nav
-            ? "fixed left-0 top-0 w-[55%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500"
-            : "fixed left-[-100%] text-[#00df9a]"
-        }
+        className={`fixed left-0 top-0 w-[55%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500 z-50 ${nav ? "left-[-100%]" : "left-0"}`}
       >
         <div className="uppercase p-4 text-white flex flex-col gap-8">
-          {/* Mobile Menu Links */}
-          <NavLink className='hover:text-[#25F09F] hover:no-underline text-[#25F09F] underline' to='/' onClick={handleNav}>Home</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/services' onClick={handleNav}>Services</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/resume' onClick={handleNav}>Resume</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/work' onClick={handleNav}>Work</NavLink>
-          <NavLink className='hover:text-[#25F09F]' to='/contact' onClick={handleNav}>Contact</NavLink>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/'
+            onClick={handleLinkClick}>
+            Home
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/services' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/services'
+            onClick={handleLinkClick}>
+            Services
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/Resume' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/Resume'
+            onClick={handleLinkClick}>
+            Resume
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/work' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/work'
+            onClick={handleLinkClick}>
+            Work
+          </Link>
+          <Link
+            className={`hover:text-[#25F09F] ${activeLink === '/contact' ? 'text-[#25F09F] underline' : 'text-white'}`}
+            to='/contact'
+            onClick={handleLinkClick}>
+            Contact
+          </Link>
         </div>
       </div>
     </div>
